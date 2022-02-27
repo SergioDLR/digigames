@@ -3,6 +3,7 @@ import NavLink from "./NavLink";
 import Icon from "../Icon";
 import brandImage from "../../assets/images/brand.png";
 import hoverImage from "../../assets/images/brand-hover.png";
+import CartWidget from "../CartWidget";
 
 const NavBar = () => {
   return (
@@ -16,6 +17,9 @@ const NavBar = () => {
         <NavLink name="Juegos Físicos" directionPath="#" />
         <NavLink name="Periféricos" directionPath="#" />
         <NavLink name="Consolas" directionPath="#" />
+        <NavLink directionPath="#">
+          <CartWidget />
+        </NavLink>
       </div>
     </div>
   );

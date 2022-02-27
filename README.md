@@ -4,3 +4,6 @@ Orientado principalmente a las keys o claves digitales, pero que tambien cuenta 
 
 Dependencias adicionales:
 .Tailwind
+
+hover color
+#7BC2FA
