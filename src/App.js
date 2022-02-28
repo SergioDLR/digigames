@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <NavBar />
-      <ItemListContainer></ItemListContainer>
+      <ItemListContainer greeting={"Soy un Item list container, ahora con props"} />
     </div>
   );
 }
