@@ -1,9 +1,12 @@
 import React from "react";
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = ({ greeting, children }) => {
   return (
-    <div className="flex justify-center bg-sky-600 text-white font-Montserrat">
-      <h1 className="p-10">{greeting}</h1>
-    </div>
+    <>
+      <div className="flex flex-col justify-center items-center bg-sky-100 font-Montserrat">
+        <h1 className="p-10">{greeting}</h1>
+        {children}
+      </div>
+    </>
   );
 };
 

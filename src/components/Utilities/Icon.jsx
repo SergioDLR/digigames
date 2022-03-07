@@ -4,7 +4,7 @@ const Icon = ({ sourceImage, size = "w-5", sourceHover = sourceImage }) => {
     <img
       src={sourceImage}
       alt="brand"
-      className={`max-w-full ${size} inline mr-2`}
+      className={`max-w-full ${size} inline `}
       onMouseOver={(e) => (e.currentTarget.src = sourceHover)}
       onMouseOut={(e) => (e.currentTarget.src = sourceImage)}
     />
