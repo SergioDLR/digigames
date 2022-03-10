@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Card from "../Utilities/Card";
+import Skeleton from "./Skeleton";
 const Item = ({ item, loaded = false }) => {
   const initialValuesP = "hidden opacity-0";
   const initialValuesDiv = "shadow";
@@ -7,23 +8,16 @@ const Item = ({ item, loaded = false }) => {
   const [animationDiv, setAnimationDiv] = useState(initialValuesDiv);
 
   const activeHover = () => {
-    setAnimation("opacity-100 ");
-    setAnimationDiv("shadow-2xl");
+    if (loaded) {
+      setAnimation("opacity-100 ");
+      setAnimationDiv("shadow-2xl");
+    }
   };
   const desactiveHover = () => {
-    setAnimation(initialValuesP);
-    setAnimationDiv(initialValuesDiv);
-  };
-
-  const unloadedContent = () => {
-    return (
-      <div className="animate-pulse flex flex-col mx-auto w-11/12 h-fit m-5 ">
-        <div className="w-full bg-slate-400 h-36 "></div>
-        <div className="h-3 my-1 bg-slate-400 rounded col-span-2"></div>
-        <div className="h-3 my-1 bg-slate-400  rounded col-span-1"></div>
-        <div className="h-3 my-1 bg-slate-400 rounded col-span-1"></div>
-      </div>
-    );
+    if (loaded) {
+      setAnimation(initialValuesP);
+      setAnimationDiv(initialValuesDiv);
+    }
   };
 
   const loadedContent = () => {
@@ -44,7 +38,7 @@ const Item = ({ item, loaded = false }) => {
       onMouseEnter={() => activeHover()}
       onMouseLeave={() => desactiveHover()}
     >
-      <Card>{loaded ? loadedContent() : unloadedContent()}</Card>
+      <Card>{loaded ? loadedContent() : <Skeleton />}</Card>
     </div>
   );
 };
