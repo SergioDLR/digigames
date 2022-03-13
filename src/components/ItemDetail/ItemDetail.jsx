@@ -2,11 +2,11 @@ import React from "react";
 import Skeleton from "../Item/Skeleton";
 import Card from "../Utilities/Card";
 import Button from "../Utilities/Button";
-const ItemDetail = ({ item }) => {
+const ItemDetail = ({ item, loading }) => {
   return (
     <div className=" w-1/2 m-auto mt-3">
       <Card>
-        {item ? (
+        {loading ? (
           <>
             <div className="flex">
               <div className="ml-auto">
