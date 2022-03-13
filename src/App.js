@@ -1,12 +1,12 @@
 import "./App.css";
 import NavBar from "./components/Navigation/NavBar";
-import ItemListContainer from "./components/ItemListContainer";
+import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer";
 
 function App() {
   return (
-    <div>
+    <div className="font-Montserrat">
       <NavBar />
-      <ItemListContainer />
+      <ItemDetailContainer />
     </div>
   );
 }
