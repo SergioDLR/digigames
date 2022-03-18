@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Utilities/Button";
-import Card from "./Utilities/Card";
-import Icon from "./Utilities/Icon";
-import addImg from "../assets/images/add-white.png";
-import subImg from "../assets/images/sub-white.png";
+import Button from "../Utilities/Button";
+import Card from "../Utilities/Card";
+import Icon from "../Utilities/Icon";
+import addImg from "../../assets/images/add-white.png";
+import subImg from "../../assets/images/sub-white.png";
 
 const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1 }) => {
   const [countProducts, setCountProducts] = useState(initial);

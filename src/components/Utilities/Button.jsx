@@ -8,10 +8,11 @@ const Button = ({
   hover = "hover:bg-blue-900",
   rounded = "rounded",
   children,
+  className,
 }) => {
   return (
     <button
-      className={`${bgColor} ${fontColor} ${rounded} ${hover} transition ease-in-out border-gray-300 p-3 px-4 m-1 min-w-fit`}
+      className={`${bgColor} ${fontColor} ${rounded} ${hover} ${className} transition ease-in-out border-gray-300 p-3 px-4 m-1 min-w-fit`}
       onClick={() => action()}
     >
       {children}
