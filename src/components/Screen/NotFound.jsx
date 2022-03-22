@@ -7,6 +7,8 @@ const NotFound = () => {
       <div className="animate-bounce m-20">
         <Icon sourceImage={Img404} size={"w-32"} />
       </div>
+      <h1 className="text-6xl">Error 404!</h1>
+      <h1 className="text-2xl ">Esta ruta parece que no lleva a ningun lado 😥</h1>
     </div>
   );
 };

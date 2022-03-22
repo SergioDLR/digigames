@@ -5,7 +5,7 @@ import Icon from "../Utilities/Icon";
 import addImg from "../../assets/images/add-white.png";
 import subImg from "../../assets/images/sub-white.png";
 
-const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1 }) => {
+const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1, onAdd }) => {
   const [countProducts, setCountProducts] = useState(initial);
 
   useEffect(() => {
@@ -24,10 +24,6 @@ const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1 }) => 
     if (countProducts > 1) setCountProducts(countProducts - 1);
   };
 
-  const onAdd = () => {
-    if (countProducts > 0) console.log("Agregar:", countProducts);
-  };
-
   return (
     <Card>
       <h2 className="text-center font-bold text-lg mb-3">{productName}</h2>
@@ -43,7 +39,7 @@ const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1 }) => 
         </Button>
       </div>
       <div className="flex justify-center">
-        <Button title="Agregar al carrito" action={onAdd} />
+        <Button title="Agregar al carrito" action={() => onAdd(countProducts)} />
       </div>
     </Card>
   );
