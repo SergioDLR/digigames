@@ -5,7 +5,7 @@ import Icon from "../Utilities/Icon";
 import addImg from "../../assets/images/add-white.png";
 import subImg from "../../assets/images/sub-white.png";
 
-const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1, onAdd }) => {
+const ItemCount = ({ product, stock = 10, initial = 1, onAdd, setAdded }) => {
   const [countProducts, setCountProducts] = useState(initial);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1, onAdd
 
   return (
     <Card>
-      <h2 className="text-center font-bold text-lg mb-3">{productName}</h2>
+      <h2 className="text-center font-bold text-lg mb-3">{product.title}</h2>
       <div className="flex flex-row justify-center">
         <Button rounded="rounded-full" action={subCount}>
           <Icon sourceImage={subImg} />
@@ -39,7 +39,13 @@ const ItemCount = ({ productName = "placeholder", stock = 10, initial = 1, onAdd
         </Button>
       </div>
       <div className="flex justify-center">
-        <Button title="Agregar al carrito" action={() => onAdd(countProducts)} />
+        <Button
+          title="Agregar al carrito"
+          action={() => {
+            onAdd(product, countProducts);
+            setAdded();
+          }}
+        />
       </div>
     </Card>
   );

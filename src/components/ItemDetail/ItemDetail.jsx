@@ -4,13 +4,12 @@ import Card from "../Utilities/Card";
 import Button from "../Utilities/Button";
 import ItemCount from "./ItemCount";
 import { useNavigate } from "react-router-dom";
+import { useCartContext } from "../CartContext";
 const ItemDetail = ({ item, loading, activeFunction }) => {
   const navigate = useNavigate();
-  const [cantidad, setCantidad] = useState(0);
+  const [added, setAdded] = useState(true);
 
-  const onAdd = (cant) => {
-    setCantidad(cantidad + cant);
-  };
+  const { onAdd } = useCartContext();
 
   return (
     <div className="w-3/4 xl:w-1/2 m-auto mt-3  ">
@@ -31,8 +30,8 @@ const ItemDetail = ({ item, loading, activeFunction }) => {
                 <h2 className="text-xl font-bold ">$ {item.price}</h2>
                 <h3 className="text-base">{item.description}</h3>
 
-                {cantidad === 0 ? (
-                  <ItemCount productName={item.title} onAdd={onAdd} />
+                {added ? (
+                  <ItemCount product={item} onAdd={onAdd} setAdded={() => setAdded(false)} />
                 ) : (
                   <div className="mt-auto">
                     <Button title="Continuar comprando" action={() => navigate(-1)} />
