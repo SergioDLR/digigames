@@ -4,11 +4,11 @@ import Card from "../Utilities/Card";
 import Button from "../Utilities/Button";
 import ItemCount from "./ItemCount";
 import { useNavigate } from "react-router-dom";
-import { useCartContext } from "../CartContext";
+import { useCartContext } from "../Context/CartContext";
+import { priceParser } from "../Utilities/priceParser";
 const ItemDetail = ({ item, loading, activeFunction }) => {
   const navigate = useNavigate();
   const [added, setAdded] = useState(true);
-
   const { onAdd } = useCartContext();
 
   return (
@@ -27,7 +27,7 @@ const ItemDetail = ({ item, loading, activeFunction }) => {
               </div>
               <div className="sm:flex sm:flex-col  lg:w-1/2 lg:ml-auto">
                 <h1 className="text-2xl font-bold mt-2">{item.title}</h1>
-                <h2 className="text-xl font-bold ">$ {item.price}</h2>
+                <h2 className="text-xl font-bold ">$ {priceParser(item.price)}</h2>
                 <h3 className="text-base">{item.description}</h3>
 
                 {added ? (

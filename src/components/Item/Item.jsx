@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Card from "../Utilities/Card";
 import { NavLink } from "react-router-dom";
+import { priceParser } from "../Utilities/priceParser";
 import Skeleton from "./Skeleton";
 const Item = ({ item, loaded = false }) => {
   const initialValuesP = "hidden opacity-0";
@@ -28,7 +29,7 @@ const Item = ({ item, loaded = false }) => {
         <NavLink to={path}>
           <img src={item.pictureUrl} className="w-auto  max-w-full m-auto max-h-36" alt="product" />
           <h2 className="text-lg font-bold my-2 line-clamp-2">{item.title}</h2>
-          <h3>$ {item.price}</h3>
+          <h3>$ {priceParser(item.price)}</h3>
 
           <p className={`transition-all ease-in-out line-clamp-2 inline-block text-xs  ${animation}`}>
             {item.description}

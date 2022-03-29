@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DesktopNavBar from "./DesktopNavBar";
 import MobileNavBar from "./MobileNavBar";
+
 const NavBar = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const categories = [
@@ -11,6 +12,7 @@ const NavBar = () => {
     { name: "Consolas", path: "/category/console" },
   ];
   const onChangeWidth = 1020;
+
   useEffect(() => {
     setWidth(window.innerWidth);
     window.addEventListener("resize", () => setWidth(window.innerWidth));

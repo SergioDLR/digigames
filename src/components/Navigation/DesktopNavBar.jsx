@@ -12,14 +12,15 @@ const DesktopNavBar = ({ categories }) => {
         <NavLink name="DigiGames" extraStyle="font-light text-2xl" directionPath="/">
           <Icon sourceImage={brandImage} sourceHover={hoverImage} size="w-10" />
         </NavLink>
+
         <div className="flex flex-row ml-auto">
+          <NavLink directionPath="/cart">
+            <CartWidget />
+          </NavLink>
           {categories.map((i) => (
             <NavLink name={i.name} directionPath={i.path} key={i.name} />
           ))}
         </div>
-        <NavLink directionPath="/cart">
-          <CartWidget />
-        </NavLink>
       </div>
     </div>
   );
