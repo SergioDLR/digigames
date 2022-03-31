@@ -18,7 +18,7 @@ const CartListContainer = () => {
             </div>
             <div className="flex flex-col md:w-8/12">
               {cartList.map((element) => (
-                <div>
+                <div key={element.item.id}>
                   <CartDetail
                     title={element.item.title}
                     itemId={element.item.id}

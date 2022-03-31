@@ -7,13 +7,11 @@ import Modal from "../Utilities/Modal";
 const CartInfo = () => {
   const [showModal, setShowModal] = useState(false);
   const { cartList, clearCart } = useCartContext();
-  const finalPrice = Math.floor(
-    parseFloat(
-      cartList.reduce(
-        (previousValue, currentValue) =>
-          previousValue + parseFloat(currentValue.item.price) * parseInt(currentValue.quantity),
-        0
-      )
+  const finalPrice = parseFloat(
+    cartList.reduce(
+      (previousValue, currentValue) =>
+        previousValue + parseFloat(currentValue.item.price) * parseInt(currentValue.quantity),
+      0
     )
   );
   return (

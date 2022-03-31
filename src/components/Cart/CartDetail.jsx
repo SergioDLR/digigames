@@ -14,7 +14,7 @@ const CartDetail = ({ itemId, title, quantity, price, image }) => {
         <div className="flex flex-row  ">
           <img className="w-24 h-24 my-auto " src={image} alt={image} />
           <div className="mx-5">
-            <h2 className="text-xl font-bold">{title}</h2>
+            <h2 className="text-xl font-bold sm:line-clamp-1 line-clamp-2 ">{title}</h2>
             <h3>Precio: {priceParser(price)} $</h3>
             <h3>Cantidad: {quantity}</h3>
             <Button action={() => removeItem(itemId)}>
