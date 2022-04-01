@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
-import productsJSON from "../products.json";
+
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 const ItemListContainer = ({ discount = false }) => {
   const [itemsJSON, setItemsJSON] = useState([]);
   const [emptyCategory, setEmptyCategory] = useState(false);
@@ -11,24 +12,29 @@ const ItemListContainer = ({ discount = false }) => {
   const catIdSearch = catId;
 
   useEffect(() => {
-    let timeOutID;
-    let loadData = new Promise((resolve) => {
-      if (catIdSearch) {
-        timeOutID = setTimeout(() => resolve(productsJSON.filter((item) => item.category === catIdSearch)), 2000);
-      } else timeOutID = setTimeout(() => resolve(productsJSON), 2000);
-    });
+    const dbFirebase = getFirestore();
+    let mounted = true;
+    const queryCollection = collection(dbFirebase, "products");
 
-    loadData.then((items) => {
-      if (items.length > 0) {
-        if (discount) setItemsJSON(items.filter((i) => i.discount === true));
-        else setItemsJSON(items);
-      } else setEmptyCategory(true);
-      setLoading(true);
-    });
+    const whereCreator = () => {
+      if (catIdSearch) return where("category", "==", catIdSearch);
+      if (discount) return where("discount", "==", true);
+      return where("category", "!=", "nothing"); //no es optimo
+    };
+    const queryFilter = query(queryCollection, whereCreator());
+
+    getDocs(queryFilter)
+      .then((items) => {
+        if (!items.empty && mounted) {
+          setItemsJSON(items.docs.map((producto) => ({ id: producto.id, ...producto.data() })));
+        } else setEmptyCategory(true);
+        setLoading(true);
+      })
+      .catch((err) => console.log(err));
     return () => {
       setLoading(false);
       setEmptyCategory(false);
-      clearTimeout(timeOutID);
+      mounted = false;
     };
   }, [catIdSearch, discount]);
 

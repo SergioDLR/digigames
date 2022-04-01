@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import productsJSON from "../products.json";
 import FocusImg from "../Utilities/FocusImg";
 import ItemDetail from "./ItemDetail";
 import srcImg from "../../assets/images/brand.png";
@@ -8,12 +7,13 @@ import backArrowImg from "../../assets/images/back-arrow.png";
 import Icon from "../Utilities/Icon";
 import Button from "../Utilities/Button";
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const { itemId } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
-  const searchId = parseInt(itemId);
+
   const navigate = useNavigate();
   const [showFocus, setShowFocus] = useState(false);
   const [sourceFocus, setSourceFocus] = useState(srcImg);
@@ -23,14 +23,19 @@ const ItemDetailContainer = () => {
   };
 
   useEffect(() => {
-    let loadData = new Promise((resolve) => {
-      setTimeout(() => resolve(productsJSON.filter((pItem) => pItem.id === searchId).shift()), 2000);
-    });
-    loadData.then((data) => {
-      setProduct(data);
+    let mounted = true;
+    const dbFirebase = getFirestore();
+    const queryDoc = doc(dbFirebase, "products", itemId);
+
+    getDoc(queryDoc).then((resp) => {
+      if (mounted) setProduct({ id: resp.id, ...resp.data() });
       setLoading(true);
     });
-  }, [searchId]);
+
+    return () => {
+      mounted = false;
+    };
+  }, [itemId]);
 
   const goBack = () => {
     if (navigate.length > 0) navigate(-1);
