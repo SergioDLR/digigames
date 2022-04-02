@@ -1,8 +1,8 @@
 import React from "react";
 import NavLink from "./NavLink";
 import Icon from "../Utilities/Icon";
-import brandImage from "../../assets/images/brand.png";
-import hoverImage from "../../assets/images/brand-hover.png";
+import brandImage from "assets/images/brand.png";
+import hoverImage from "assets/images/brand-hover.png";
 import CartWidget from "./CartWidget";
 
 const DesktopNavBar = ({ categories }) => {

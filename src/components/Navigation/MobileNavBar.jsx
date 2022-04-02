@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import NavLink from "./NavLink";
 import Icon from "../Utilities/Icon";
-import brandImage from "../../assets/images/brand.png";
-import hoverImage from "../../assets/images/brand-hover.png";
+import brandImage from "assets/images/brand.png";
+import hoverImage from "assets/images/brand-hover.png";
 import CartWidget from "./CartWidget";
-import menuIconHover from "../../assets/images/menu-open-hover.png";
-import menuIcon from "../../assets/images/menu-open.png";
+import menuIconHover from "assets/images/menu-open-hover.png";
+import menuIcon from "assets/images/menu-open.png";
 
 const MobileNavBar = ({ categories }) => {
   const [show, setShow] = useState(false);

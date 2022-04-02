@@ -1,6 +1,6 @@
 import React from "react";
 import Icon from "./Icon";
-import CrossImg from "../../assets/images/cross.png";
+import CrossImg from "assets/images/cross.png";
 const FocusImg = ({ active = false, imgSource, close }) => {
   return (
     <>

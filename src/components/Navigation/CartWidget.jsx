@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "../Utilities/Icon";
-import shoppingCartImg from "../../assets/images/shopping-cart.png";
-import hoverCartImg from "../../assets/images/shopping-cart-hover.png";
+import shoppingCartImg from "assets/images/shopping-cart.png";
+import hoverCartImg from "assets/images/shopping-cart-hover.png";
 import { useCartContext } from "../Context/CartContext";
 const CartWidget = ({ styles }) => {
   const { quantityItems } = useCartContext();

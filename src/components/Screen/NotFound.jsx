@@ -1,5 +1,5 @@
 import React from "react";
-import Img404 from "../../assets/images/error-404.png";
+import Img404 from "assets/images/error-404.png";
 import Icon from "../Utilities/Icon";
 const NotFound = () => {
   return (
