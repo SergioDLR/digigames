@@ -11,7 +11,7 @@ const NavBar = () => {
     { name: "Periféricos", path: "/category/peripherals" },
     { name: "Consolas", path: "/category/console" },
   ];
-  const onChangeWidth = 1020;
+  const onChangeWidth = 1200;
 
   useEffect(() => {
     setWidth(window.innerWidth);

@@ -10,13 +10,13 @@ const Item = ({ item, loaded = false }) => {
   const [animationDiv, setAnimationDiv] = useState(initialValuesDiv);
 
   const activeHover = () => {
-    if (loaded) {
+    if (loaded && item.stock > 0) {
       setAnimation("opacity-100 ");
       setAnimationDiv("shadow-2xl");
     }
   };
   const desactiveHover = () => {
-    if (loaded) {
+    if (loaded && item.stock > 0) {
       setAnimation(initialValuesP);
       setAnimationDiv(initialValuesDiv);
     }
@@ -30,10 +30,13 @@ const Item = ({ item, loaded = false }) => {
           <img src={item.pictureUrl} className="w-auto  max-w-full m-auto max-h-36" alt="product" />
           <h2 className="text-lg font-bold my-2 line-clamp-2">{item.title}</h2>
           <h3>$ {priceParser(item.price)}</h3>
-
-          <p className={`transition-all ease-in-out line-clamp-2 inline-block text-xs  ${animation}`}>
-            {item.description}
-          </p>
+          {item.stock <= 0 ? (
+            <p className="text-red-600">No hay stock</p>
+          ) : (
+            <p className={`transition-all ease-in-out line-clamp-2 inline-block text-xs  ${animation}`}>
+              {item.description}
+            </p>
+          )}
         </NavLink>
       </div>
     );
@@ -44,7 +47,13 @@ const Item = ({ item, loaded = false }) => {
       onMouseEnter={() => activeHover()}
       onMouseLeave={() => desactiveHover()}
     >
-      <Card>{loaded ? loadedContent() : <Skeleton />}</Card>
+      {loaded ? (
+        <Card bgColor={item.stock > 0 ? "bg-white" : "bg-gray-400"}> {loadedContent()} </Card>
+      ) : (
+        <Card>
+          <Skeleton />
+        </Card>
+      )}
     </div>
   );
 };

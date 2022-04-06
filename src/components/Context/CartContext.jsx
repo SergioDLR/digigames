@@ -46,6 +46,19 @@ const CartContextProvider = ({ children }) => {
     cartQuantity();
   }, [cartList]);
 
+  //Carga el cart guardado en el primer montado
+  useEffect(() => {
+    let cartLocal = localStorage.getItem("cart");
+    if (cartLocal) setCartList(JSON.parse(cartLocal));
+  }, []);
+
+  //Modifica el cart guardado en el local Storage
+  useEffect(() => updateStoragedCart(cartList), [cartList, setCartList]);
+  //Modifica el cart guardado en el local Storage
+  const updateStoragedCart = (cart) => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
   return (
     <CartContext.Provider value={{ cartList, onAdd, removeItem, clearCart, isInCart, quantityItems }}>
       {children}

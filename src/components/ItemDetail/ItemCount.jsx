@@ -26,27 +26,35 @@ const ItemCount = ({ product, stock = 10, initial = 1, onAdd, setAdded }) => {
 
   return (
     <Card>
-      <h2 className="text-center font-bold text-lg mb-3">{product.title}</h2>
-      <div className="flex flex-row justify-center">
-        <Button rounded="rounded-full" action={subCount}>
-          <Icon sourceImage={subImg} />
-        </Button>
-        <div className="flex-auto text-center m-auto">
-          <span>{countProducts}</span>
-        </div>
-        <Button rounded="rounded-full " action={addCount}>
-          <Icon sourceImage={addImg} />
-        </Button>
-      </div>
-      <div className="flex justify-center">
-        <Button
-          title="Agregar al carrito"
-          action={() => {
-            onAdd(product, countProducts);
-            setAdded();
-          }}
-        />
-      </div>
+      {stock > 0 ? (
+        <>
+          {" "}
+          <div className="flex flex-row justify-center">
+            <Button rounded="rounded-full" action={subCount}>
+              <Icon sourceImage={subImg} />
+            </Button>
+            <div className="flex-auto text-center m-auto">
+              <span>{countProducts}</span>
+            </div>
+            <Button rounded="rounded-full " action={addCount}>
+              <Icon sourceImage={addImg} />
+            </Button>
+          </div>
+          <div className="flex justify-center">
+            <Button
+              title="Agregar al carrito"
+              action={() => {
+                onAdd(product, countProducts);
+                setAdded();
+              }}
+            />
+          </div>{" "}
+        </>
+      ) : (
+        <>
+          <p className="text-red-600 text-center">No hay stock de este articulo 🙁</p>
+        </>
+      )}
     </Card>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-const defAction = () => console.warn("Please attach an action for Button component");
+const defAction = () => {};
 const Button = ({
   title = "",
   action = defAction,
@@ -8,10 +8,12 @@ const Button = ({
   hover = "hover:bg-blue-900",
   rounded = "rounded",
   children,
+  type = "button",
   className,
 }) => {
   return (
     <button
+      type={type}
       className={`${bgColor} ${fontColor} ${rounded} ${hover} ${className} transition ease-in-out border-gray-300 p-3 px-4 m-1 min-w-fit`}
       onClick={() => action()}
     >

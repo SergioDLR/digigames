@@ -6,6 +6,8 @@ import ItemCount from "./ItemCount";
 import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../Context/CartContext";
 import { priceParser } from "../Utilities/priceParser";
+import AddToWishList from "./AddToWishList";
+
 const ItemDetail = ({ item, loading, activeFunction }) => {
   const navigate = useNavigate();
   const [added, setAdded] = useState(true);
@@ -29,9 +31,9 @@ const ItemDetail = ({ item, loading, activeFunction }) => {
                 <h1 className="text-2xl font-bold mt-2">{item.title}</h1>
                 <h2 className="text-xl font-bold ">$ {priceParser(item.price)}</h2>
                 <h3 className="text-base">{item.description}</h3>
-
+                <AddToWishList item={item} />
                 {added ? (
-                  <ItemCount product={item} onAdd={onAdd} setAdded={() => setAdded(false)} />
+                  <ItemCount product={item} stock={item.stock} onAdd={onAdd} setAdded={() => setAdded(false)} />
                 ) : (
                   <div className="mt-auto">
                     <Button title="Continuar comprando" action={() => navigate(-1)} />

@@ -12,7 +12,8 @@ const DesktopNavBar = ({ categories }) => {
         <NavLink name="DigiGames" extraStyle="font-light text-2xl" directionPath="/">
           <Icon sourceImage={brandImage} sourceHover={hoverImage} size="w-10" />
         </NavLink>
-
+        <NavLink name="Mi sesion" directionPath="/sesion" />
+        <NavLink name="Mis órdenes" directionPath="/ordertrack" />
         <div className="flex flex-row ml-auto">
           <NavLink directionPath="/cart">
             <CartWidget />

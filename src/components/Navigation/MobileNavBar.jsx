@@ -21,12 +21,15 @@ const MobileNavBar = ({ categories }) => {
         >
           <Icon sourceImage={menuIcon} sourceHover={menuIconHover} size="w-8 h-auto mx-5" />
         </div>
+
         <NavLink directionPath="/cart">
           <CartWidget />
         </NavLink>
       </div>
       {show && (
         <div className="text-white animate-load">
+          <NavLink name="Mi sesion" directionPath="/sesion" />
+          <NavLink directionPath="/ordertrack" name="Mis órdenes" />
           {categories.map((i) => (
             <NavLink name={i.name} directionPath={i.path} key={i.name} />
           ))}
