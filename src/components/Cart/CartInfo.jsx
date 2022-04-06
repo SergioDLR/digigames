@@ -4,10 +4,11 @@ import { useCartContext } from "../Context/CartContext";
 import Button from "../Utilities/Button";
 import { priceParser } from "../Utilities/priceParser";
 import Modal from "../Utilities/Modal";
-import { addDoc, collection, getFirestore, query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import ContactForm from "./ContactForm";
 import Spinner from "components/Utilities/Spinner";
 import { useAlert } from "react-alert";
+import { createOrder, updateStocks } from "components/Firebase/OrderCreation";
 import { activeSesion } from "components/Firebase/activeSesion";
 
 const CartInfo = () => {
@@ -41,21 +42,6 @@ const CartInfo = () => {
     )
   );
 
-  const createOrder = () => {
-    let order = {};
-    const date = new Date();
-    order.buyer = { orderName, orderPhone, orderMail };
-    order.items = cartList.map((element) => {
-      const { id, title, price } = element.item;
-      const quantity = element.quantity;
-      return { id, title, price, quantity };
-    });
-    order.date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-    order.total = finalPrice;
-
-    return order;
-  };
-
   const handleSubmitOrder = (evt) => {
     evt.preventDefault();
     if (orderMail === orderMailConfirm) {
@@ -65,12 +51,12 @@ const CartInfo = () => {
 
       const dbConnect = getFirestore();
       const queryCollection = collection(dbConnect, "orders");
-      const order = createOrder();
+      const order = createOrder(orderName, orderPhone, orderMail, finalPrice, cartList);
 
       addDoc(queryCollection, order)
         .then(({ id }) => {
           if (id) {
-            updateStocks(dbConnect);
+            updateStocks(dbConnect, cartList);
             setShowCancelForm(false);
             setOrderId(id);
             setFormSubmitLoading("ended");
@@ -81,34 +67,13 @@ const CartInfo = () => {
         .catch((err) => {
           console.log(err);
           setShowCancelForm(true);
-          setFormTitle("Orden un error 😭");
+          setFormTitle("Ocurrio un error 😭");
           setshowFormModalActions(true);
           setFormSubmitLoading("error");
         });
     } else {
-      alert.error("Los correos no coinciden"); //remplazar
+      alert.error("Los correos no coinciden");
     }
-  };
-
-  const updateStocks = async (dbConnect) => {
-    const queryCollection = collection(dbConnect, "products");
-    const queryStockUpdate = await query(
-      queryCollection,
-      where(
-        documentId(),
-        "in",
-        cartList.map((e) => e.item.id)
-      )
-    );
-    const batch = writeBatch(dbConnect);
-    await getDocs(queryStockUpdate).then((resp) =>
-      resp.docs.forEach((e) =>
-        batch.update(e.ref, {
-          stock: e.data().stock - cartList.find((element) => element.item.id === e.id).quantity,
-        })
-      )
-    );
-    batch.commit();
   };
 
   const acceptFormButton = () => {

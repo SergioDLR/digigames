@@ -10,7 +10,7 @@ export const login = (email, password) => {
       })
       .catch((error) => {
         if (error.code === "auth/user-not-found") reject("No se encontro el usuario");
-        else reject("Ocurrio un error, intentalo mas tarde");
+        else reject("No se encontro el usuario, ocurrio un error");
       });
   });
   return promise;

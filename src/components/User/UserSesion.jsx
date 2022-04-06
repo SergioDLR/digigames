@@ -29,7 +29,12 @@ const UserSesion = () => {
         <>
           <h1>Bienvenido {user.displayName}</h1>
           <Button action={() => navigate("/wishlist")} title="Tu wishlist"></Button>
-          <Button action={() => closeSesion(setUser)} title="cerrar sesion"></Button>
+          <Button
+            bgColor="bg-red-600"
+            hover="hover:bg-red-900"
+            action={() => closeSesion(setUser)}
+            title="Cerrar sesion"
+          ></Button>
         </>
       )}
     </div>

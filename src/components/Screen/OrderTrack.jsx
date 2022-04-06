@@ -20,7 +20,10 @@ const OrderTrack = () => {
         .then((resp) => {
           setBuy(resp.data());
           setLoaded(true);
-          if (buy === undefined) alert.error("No se econtro la compra ");
+
+          console.log(resp);
+          if (resp.data() === undefined) alert.error("No se econtro la compra ");
+          else alert.success("Se econtro la compra ");
         })
         .catch((e) => alert.error("Ocurrio un eror en la busqueda"));
     } else {
