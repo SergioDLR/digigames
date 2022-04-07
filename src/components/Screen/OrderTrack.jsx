@@ -69,7 +69,7 @@ const OrderTrack = () => {
   return (
     <div className="flex flex-col  items-center bg-sky-100 min-h-screen">
       <div className="w-10/12">
-        <div className="mt-2  m-auto">
+        <div className="mt-2  m-auto animate-load">
           <form onSubmit={handleTrackSearch} className="flex mt-2 w-8/12 m-auto">
             <input
               className="block w-full border-2 rounded-md px-1 py-3"

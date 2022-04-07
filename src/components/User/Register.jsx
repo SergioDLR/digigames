@@ -9,20 +9,22 @@ const Register = ({ setUser }) => {
   const [mailConfirm, setMailConfirm] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setpasswordConfirm] = useState("");
-
   const [phone, setPhone] = useState();
   const alert = useAlert();
+
   const handleLogin = (evt) => {
     evt.preventDefault();
-    if (mail === mailConfirm && password === passwordConfirm)
-      register(mail, password, name, phone)
-        .then((res) => {
-          alert.success("Registrado con exito sesion");
-          activeSesion().then((server) => setUser(server));
-        })
-        .catch((error) => alert.error(error));
-    else if (mail !== mailConfirm) alert.error("Verifica que el mail de confirmacion sea igual al mail");
-    else if (password !== passwordConfirm) alert.error("Verifica que las contraseñas sean iguales");
+    //Chequedo de inputs
+    if (mail !== mailConfirm || mail.length < 3 || !mail.includes("@")) return alert.error("ingresa un mail valido");
+    if (phone.length < 3) return alert.error("ingresa un numero de telefono valido");
+    if (password.length < 6 || password !== passwordConfirm) return alert.error("Ingresa una contraseña valida");
+    if (name.length < 3) return alert.error("ingresa un nombre valido");
+    register(mail, password, name, phone)
+      .then((res) => {
+        alert.success("Registrado con exito sesion");
+        activeSesion().then((server) => setUser(server));
+      })
+      .catch((error) => alert.error(error));
   };
   return (
     <div className="lg:w-5/12 lg:ml-auto mt-2">

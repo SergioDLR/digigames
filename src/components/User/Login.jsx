@@ -9,6 +9,12 @@ const Login = ({ setUser }) => {
   const alert = useAlert();
   const handleLogin = (evt) => {
     evt.preventDefault();
+    //casos de salida
+
+    if (mail.length < 3 || !mail.includes("@") || typeof mail != "string") {
+      return alert.error("introdusca un mail valido");
+    }
+    if (password.length < 6) return alert.error("ingrese una contraseña valida");
     login(mail, password)
       .then((res) => {
         alert.success("Iniciando sesion");

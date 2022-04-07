@@ -3,8 +3,9 @@ DigiGames es un e-commerce destinado a la venta de productos de gaming.
 Orientado principalmente a las keys o claves digitales, pero que también cuenta con productos físicos como consolas, periféricos y juegos físicos.
 
 Dependencias adicionales:
-.Tailwind
+.Tailwind: Agrege tailwind por que queria aprender a utilizarlo.
 .react-router-dom
+.react-alers: agrege esta libreria de alertas para abstraerme del proceso de crearla yo mismo, queria ahorrar tiempo para dedicarselo a las otras funcionalidades.
 
 Algunas decisiones que tome:
 -Cree el componente RoutesDef para aislar la definicion de las rutas y poder tenerlas en un componente separado.

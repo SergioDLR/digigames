@@ -32,7 +32,7 @@ const CartInfo = () => {
   useEffect(() => {
     activeSesion()
       .then((resp) => setUser(resp))
-      .catch((e) => console.log(e));
+      .catch((e) => e);
   }, []);
   const finalPrice = parseFloat(
     cartList.reduce(
@@ -44,36 +44,46 @@ const CartInfo = () => {
 
   const handleSubmitOrder = (evt) => {
     evt.preventDefault();
-    if (orderMail === orderMailConfirm) {
-      setFormSubmitLoading("loading");
-      setFormTitle("Estamos procesando su orden!");
-      setshowFormModalActions(false);
-
-      const dbConnect = getFirestore();
-      const queryCollection = collection(dbConnect, "orders");
-      const order = createOrder(orderName, orderPhone, orderMail, finalPrice, cartList);
-
-      addDoc(queryCollection, order)
-        .then(({ id }) => {
-          if (id) {
-            updateStocks(dbConnect, cartList);
-            setShowCancelForm(false);
-            setOrderId(id);
-            setFormSubmitLoading("ended");
-            setshowFormModalActions(true);
-            setFormTitle("Orden procesada!");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setShowCancelForm(true);
-          setFormTitle("Ocurrio un error 😭");
-          setshowFormModalActions(true);
-          setFormSubmitLoading("error");
-        });
-    } else {
-      alert.error("Los correos no coinciden");
+    //casos de salida, los inputs no son correctos
+    if (orderName.length < 1) {
+      return alert.error("Ingrese un nombre valido");
     }
+    if (orderPhone.length < 1) {
+      return alert.error("Ingrese un telefono valido");
+    }
+    if (orderMail.length < 3 || !orderMail.includes("@") || typeof orderMail != "string") {
+      return alert.error("Ingrese un email valido");
+    }
+    if (orderMail !== orderMailConfirm) {
+      return alert.error("los mails no son iguales");
+    }
+
+    setFormSubmitLoading("loading");
+    setFormTitle("Estamos procesando su orden!");
+    setshowFormModalActions(false);
+
+    const dbConnect = getFirestore();
+    const queryCollection = collection(dbConnect, "orders");
+    const order = createOrder(orderName, orderPhone, orderMail, finalPrice, cartList);
+
+    addDoc(queryCollection, order)
+      .then(({ id }) => {
+        if (id) {
+          updateStocks(dbConnect, cartList);
+          setShowCancelForm(false);
+          setOrderId(id);
+          setFormSubmitLoading("ended");
+          setshowFormModalActions(true);
+          setFormTitle("Orden procesada!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setShowCancelForm(true);
+        setFormTitle("Ocurrio un error 😭");
+        setshowFormModalActions(true);
+        setFormSubmitLoading("error");
+      });
   };
 
   const acceptFormButton = () => {

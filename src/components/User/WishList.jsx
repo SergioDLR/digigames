@@ -1,31 +1,44 @@
 import React, { useEffect, useState } from "react";
 
 import { getWishList } from "components/Firebase/wishlist";
-import ItemList from "components/Item/ItemList";
+import ItemDetail from "components/ItemDetail/ItemDetail";
 import Spinner from "components/Utilities/Spinner";
 
 const WishList = () => {
   const [wishItems, setWishItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
-
+  const [errorMsg, setMsg] = useState("Aun no tienes productos en tu lista de deseados, ¡Agrega algunos!");
   useEffect(() => {
-    getWishList().then(({ wish }) => {
-      setWishItems(wish.products);
-      setLoaded(true);
-    });
+    reloadWishList();
   }, []);
-
+  const reloadWishList = () => {
+    getWishList()
+      .then(({ wish }) => {
+        setWishItems(wish.products);
+        setLoaded(true);
+      })
+      .catch((e) => {
+        setLoaded(true);
+        setMsg("Parece que no has iniciado sesion, inicia una para poder ver la lista de deseados");
+      });
+  };
   const Show = () => {
     if (loaded) {
       return (
         <>
           {wishItems.length < 1 ? (
-            <div className="mt-5">
-              <h1 className="text-2xl">Aun no tienes productos en tu wishlist, ¡Agrega algunos!</h1>
-              <h1 className="text-2xl text-center">🤩</h1>
+            <div className="mt-5 animate-load">
+              <h1 className="text-2xl">{errorMsg}</h1>
             </div>
           ) : (
-            <ItemList items={wishItems} loaded={loaded} />
+            <>
+              <h1 className="font-bold mt-5 animate-load">Tu lista de deseados</h1>
+              <div className="grid grid-cols-1 w-10/12 mx-auto ">
+                {wishItems.map((item, index) => (
+                  <ItemDetail loading={true} item={item} key={index} />
+                ))}
+              </div>
+            </>
           )}
         </>
       );

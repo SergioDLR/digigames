@@ -27,10 +27,12 @@ const ItemDetailContainer = () => {
     const dbFirebase = getFirestore();
     const queryDoc = doc(dbFirebase, "products", itemId);
 
-    getDoc(queryDoc).then((resp) => {
-      if (mounted) setProduct({ id: resp.id, ...resp.data() });
-      setLoading(true);
-    });
+    getDoc(queryDoc)
+      .then((resp) => {
+        if (mounted) setProduct({ id: resp.id, ...resp.data() });
+        setLoading(true);
+      })
+      .catch((e) => e);
 
     return () => {
       mounted = false;

@@ -3,6 +3,7 @@ import Card from "../Utilities/Card";
 import { NavLink } from "react-router-dom";
 import { priceParser } from "../Utilities/priceParser";
 import Skeleton from "./Skeleton";
+import AddToWishList from "components/ItemDetail/AddToWishList";
 const Item = ({ item, loaded = false }) => {
   const initialValuesP = "hidden opacity-0";
   const initialValuesDiv = "shadow";
@@ -29,6 +30,7 @@ const Item = ({ item, loaded = false }) => {
         <NavLink to={path}>
           <img src={item.pictureUrl} className="w-auto  max-w-full m-auto max-h-36" alt="product" />
           <h2 className="text-lg font-bold my-2 line-clamp-2">{item.title}</h2>
+
           <h3>$ {priceParser(item.price)}</h3>
           {item.stock <= 0 ? (
             <p className="text-red-600">No hay stock</p>
@@ -38,6 +40,7 @@ const Item = ({ item, loaded = false }) => {
             </p>
           )}
         </NavLink>
+        <AddToWishList item={item} />
       </div>
     );
   };
@@ -48,7 +51,7 @@ const Item = ({ item, loaded = false }) => {
       onMouseLeave={() => desactiveHover()}
     >
       {loaded ? (
-        <Card bgColor={item.stock > 0 ? "bg-white" : "bg-gray-400"}> {loadedContent()} </Card>
+        <Card bgColor={item.stock > 0 ? "bg-white" : "bg-gray-400"}> {loadedContent()}</Card>
       ) : (
         <Card>
           <Skeleton />

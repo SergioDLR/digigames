@@ -12,31 +12,33 @@ const UserSesion = () => {
   useEffect(() => {
     activeSesion()
       .then((resp) => setUser(resp))
-      .catch((e) => console.log(e));
+      .catch((e) => setUser(undefined));
   }, []);
 
   return (
-    <div className="flex flex-col items-center  bg-sky-100 font-Montserrat min-h-screen h-full">
-      {user === undefined ? (
-        <>
-          <h1 className="font-bold text-xl text-center">Ingresa a nuestra tienda</h1>
-          <div className="flex flex-col lg:flex-row w-10/12 mt-2">
-            <Login setUser={setUser}></Login>
-            <Register setUser={setUser}></Register>
-          </div>
-        </>
-      ) : (
-        <>
-          <h1>Bienvenido {user.displayName}</h1>
-          <Button action={() => navigate("/wishlist")} title="Tu wishlist"></Button>
-          <Button
-            bgColor="bg-red-600"
-            hover="hover:bg-red-900"
-            action={() => closeSesion(setUser)}
-            title="Cerrar sesion"
-          ></Button>
-        </>
-      )}
+    <div className="bg-sky-100 font-Montserrat min-h-screen h-full ">
+      <div className="animate-load flex flex-col items-center">
+        {user === undefined ? (
+          <>
+            <h1 className="font-bold text-xl text-center">Ingresa a nuestra tienda</h1>
+            <div className="flex flex-col lg:flex-row w-10/12 mt-2">
+              <Login setUser={setUser}></Login>
+              <Register setUser={setUser}></Register>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1>Bienvenido {user.displayName}</h1>
+            <Button action={() => navigate("/wishlist")} title="Tu lista de deseados"></Button>
+            <Button
+              bgColor="bg-red-600"
+              hover="hover:bg-red-900"
+              action={() => closeSesion(setUser)}
+              title="Cerrar sesion"
+            ></Button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

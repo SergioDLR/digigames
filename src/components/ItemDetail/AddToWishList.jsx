@@ -11,37 +11,43 @@ const AddToWishList = ({ item }) => {
 
   const addToWishListWraper = () => {
     setLoading(false);
-    addToWishList(item).then(() => {
-      setLoading(true);
-      setIsInWish(!isInWish);
-    });
+    addToWishList(item)
+      .then(() => {
+        setLoading(true);
+        setIsInWish(!isInWish);
+      })
+      .catch((e) => e);
   };
   const deleteFromWishListWraper = () => {
     setLoading(false);
-    deleteFromWishList(item).then(() => {
-      setLoading(true);
-      setIsInWish(!isInWish);
-    });
+    deleteFromWishList(item)
+      .then(() => {
+        setLoading(true);
+        setIsInWish(!isInWish);
+      })
+      .catch((e) => e);
   };
 
   useEffect(() => {
-    isInWishList(item).then(({ isIn }) => {
-      setLoading(true);
-      setIsInWish(isIn);
-      activeSesion().then((resp) => setUser(resp));
-    });
+    isInWishList(item)
+      .then(({ isIn }) => {
+        setLoading(true);
+        setIsInWish(isIn);
+        activeSesion().then((resp) => setUser(resp));
+      })
+      .catch((e) => e);
   }, [item]);
 
   const ShowButton = () => {
     if (!isInWish) {
-      return <Button action={addToWishListWraper} title="Añadir a la wishlist" />;
+      return <Button action={addToWishListWraper} title="Añadir a la lista de deseados" />;
     } else {
       return (
         <Button
           bgColor="bg-red-600"
           hover="hover:bg-red-900"
           action={deleteFromWishListWraper}
-          title="Quitar de la wishlist"
+          title="Quitar de la lista de deseados"
         />
       );
     }

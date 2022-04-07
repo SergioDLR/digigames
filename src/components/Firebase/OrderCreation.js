@@ -11,6 +11,7 @@ export const createOrder = (orderName, orderPhone, orderMail, finalPrice, cartLi
   });
   order.date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
   order.total = finalPrice;
+  order.state = "generada";
 
   return order;
 };

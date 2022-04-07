@@ -4,17 +4,19 @@ import { activeSesion } from "components/Firebase/activeSesion";
 export const getWishList = () => {
   const dbConnect = getFirestore();
   let promise = new Promise((resolve, reject) => {
-    activeSesion().then((user) => {
-      if (user) {
-        const queryFilter = doc(dbConnect, "wishlists", user.uid);
-        getDoc(queryFilter)
-          .then((resp) => {
-            let wish = resp.data();
-            resolve({ wish, user });
-          })
-          .catch((e) => reject(e));
-      }
-    });
+    activeSesion()
+      .then((user) => {
+        if (user) {
+          const queryFilter = doc(dbConnect, "wishlists", user.uid);
+          getDoc(queryFilter)
+            .then((resp) => {
+              let wish = resp.data();
+              resolve({ wish, user });
+            })
+            .catch((e) => reject(e));
+        }
+      })
+      .catch((e) => reject(e));
   });
   return promise;
 };
@@ -46,7 +48,7 @@ export const addToWishList = (item) => {
           updateDoc(queryUpdate, { products: wish.products }).then(resolve(true)).catch(reject(false));
         }
       })
-      .catch();
+      .catch((e) => reject(e));
   });
   return promise;
 };
@@ -64,7 +66,7 @@ export const deleteFromWishList = (item) => {
           updateDoc(queryUpdate, { products: wish.products }).then(resolve(true)).catch(reject(false));
         }
       })
-      .catch();
+      .catch((e) => reject(e));
   });
   return promise;
 };
