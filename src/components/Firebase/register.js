@@ -14,7 +14,9 @@ export const register = async (email, password, name, phone) => {
         setDoc(doc(db, "wishlists", res.user.uid), {
           products: [],
         });
-
+        setDoc(doc(db, "phone", res.user.uid), {
+          phone,
+        });
         resolve("Se registro al usuario con exito");
       })
       .catch((e) => reject(e));

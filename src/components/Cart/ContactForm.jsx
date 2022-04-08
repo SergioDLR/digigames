@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
+import { getPhone } from "components/Firebase/activeSesion";
 const ContactForm = ({ handleSubmitOrder, setOrderName, setOrderMail, setOrderPhone, setOrderMailConfirm, sesion }) => {
   useEffect(() => {
     if (sesion !== undefined) {
       setOrderName(sesion.displayName);
       setOrderMail(sesion.email);
       setOrderMailConfirm(sesion.email);
-      setOrderPhone(sesion.phoneNumber);
+      getPhone()
+        .then((res) => setOrderPhone(res.phone))
+        .catch((e) => e);
     }
   }, []);
   return (
