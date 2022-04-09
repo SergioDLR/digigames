@@ -10,6 +10,7 @@ import Spinner from "components/Utilities/Spinner";
 import { useAlert } from "react-alert";
 import { createOrder, updateStocks } from "components/Firebase/OrderCreation";
 import { activeSesion } from "components/Firebase/activeSesion";
+import { stockCheck } from "components/Firebase/stockCheck";
 
 const CartInfo = () => {
   //Modals  vars
@@ -65,24 +66,34 @@ const CartInfo = () => {
     const dbConnect = getFirestore();
     const queryCollection = collection(dbConnect, "orders");
     const order = createOrder(orderName, orderPhone, orderMail, finalPrice, cartList);
-
-    addDoc(queryCollection, order)
-      .then(({ id }) => {
-        if (id) {
-          updateStocks(dbConnect, cartList);
-          setShowCancelForm(false);
-          setOrderId(id);
-          setFormSubmitLoading("ended");
-          setshowFormModalActions(true);
-          setFormTitle("Orden procesada!");
-        }
+    stockCheck(cartList)
+      .then((res) => {
+        console.log(res);
+        addDoc(queryCollection, order)
+          .then(({ id }) => {
+            if (id) {
+              updateStocks(dbConnect, cartList);
+              setShowCancelForm(false);
+              setOrderId(id);
+              setFormSubmitLoading("ended");
+              setshowFormModalActions(true);
+              setFormTitle("Orden procesada!");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            setShowCancelForm(true);
+            setFormTitle("Ocurrio un error 😭");
+            setshowFormModalActions(true);
+            setFormSubmitLoading("error");
+          });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((e) => {
         setShowCancelForm(true);
-        setFormTitle("Ocurrio un error 😭");
+        setFormTitle(e.msg + "😭");
         setshowFormModalActions(true);
         setFormSubmitLoading("error");
+        alert.error(e.msg);
       });
   };
 

@@ -4,9 +4,11 @@ import Register from "./Register";
 import { activeSesion } from "components/Firebase/activeSesion";
 import Button from "components/Utilities/Button";
 import { closeSesion } from "components/Firebase/cerrarSesion";
+import { useAlert } from "react-alert";
 import "firebase/auth";
 import { useNavigate } from "react-router-dom";
 const UserSesion = () => {
+  const alert = useAlert();
   const [user, setUser] = useState();
   const navigate = useNavigate();
   useEffect(() => {
@@ -33,9 +35,12 @@ const UserSesion = () => {
             <Button
               bgColor="bg-red-600"
               hover="hover:bg-red-900"
-              action={() => closeSesion(setUser)}
+              action={() => {
+                closeSesion(setUser);
+                alert.success("Se cerro la sesion correctamente");
+              }}
               title="Cerrar sesion"
-            ></Button>
+            />
           </>
         )}
       </div>
