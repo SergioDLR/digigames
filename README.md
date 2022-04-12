@@ -26,4 +26,4 @@ Orientado principalmente a las keys o claves digitales, pero que también cuenta
 - **Tailwind.**
 - **Firebase.**
 
-### **Puedes probar la aplicación de digigames utilizando el siguiente link: _[DigiGames Demo](sergiodlr.github.com/digigames)_**
+### **Puedes probar la aplicación de digigames utilizando el siguiente link: _[DigiGames Demo](https://sergiodlr.github.io/digiGames/)_**
