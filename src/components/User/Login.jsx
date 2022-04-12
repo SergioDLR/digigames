@@ -3,7 +3,7 @@ import Button from "components/Utilities/Button";
 import { login } from "components/Firebase/login";
 import { useAlert } from "react-alert";
 import { activeSesion } from "components/Firebase/activeSesion";
-const Login = ({ setUser }) => {
+const Login = ({ setUser, setLoading }) => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const alert = useAlert();
@@ -15,12 +15,14 @@ const Login = ({ setUser }) => {
       return alert.error("introdusca un mail valido");
     }
     if (password.length < 6) return alert.error("ingrese una contraseña valida");
+    setLoading("loading");
     login(mail, password)
       .then((res) => {
         alert.success("Iniciando sesion");
         activeSesion().then((server) => setUser(server));
       })
-      .catch((error) => alert.error(error));
+      .catch((error) => alert.error(error))
+      .finally(() => setLoading("loaded"));
   };
   return (
     <div className="lg:w-5/12 lg:ml-auto mt-2">

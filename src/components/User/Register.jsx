@@ -3,7 +3,7 @@ import Button from "components/Utilities/Button";
 import { register } from "components/Firebase/register";
 import { useAlert } from "react-alert";
 import { activeSesion } from "components/Firebase/activeSesion";
-const Register = ({ setUser }) => {
+const Register = ({ setUser, setLoading }) => {
   const [mail, setMail] = useState("");
   const [name, setName] = useState("");
   const [mailConfirm, setMailConfirm] = useState("");
@@ -19,12 +19,14 @@ const Register = ({ setUser }) => {
     if (phone.length < 3) return alert.error("ingresa un numero de telefono valido");
     if (password.length < 6 || password !== passwordConfirm) return alert.error("Ingresa una contraseña valida");
     if (name.length < 3) return alert.error("ingresa un nombre valido");
+    setLoading("loading");
     register(mail, password, name, phone)
       .then((res) => {
         alert.success("Registrado con exito sesion");
         activeSesion().then((server) => setUser(server));
       })
-      .catch((error) => alert.error(error));
+      .catch((error) => alert.error(error))
+      .finally(() => setLoading("loaded"));
   };
   return (
     <div className="lg:w-5/12 lg:ml-auto mt-2">

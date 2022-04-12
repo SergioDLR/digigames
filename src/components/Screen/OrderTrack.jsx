@@ -20,14 +20,12 @@ const OrderTrack = () => {
         .then((resp) => {
           setBuy(resp.data());
           setLoaded(true);
-
-          console.log(resp);
           if (resp.data() === undefined) alert.error("No se econtro la compra ");
           else alert.success("Se econtro la compra ");
         })
         .catch((e) => alert.error("Ocurrio un eror en la busqueda"));
     } else {
-      alert.error("Ingresa algo para buscar"); //Remplace for alert
+      alert.error("Ingresa algo para buscar");
     }
   };
 
@@ -53,6 +51,7 @@ const OrderTrack = () => {
             <h1 className="font-bold">Productos comprados:</h1>
             <BuyerItems />
             <h2 className="font-bold text-xl">Total: {priceParser(buy.total)}</h2>
+            <h2 className="font-bold text-xl">Estado: {buy.state}</h2>
           </div>
         );
       } else {

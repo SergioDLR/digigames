@@ -26,7 +26,7 @@ const Item = ({ item, loaded = false }) => {
   const loadedContent = () => {
     const path = `/item/${item.id}`;
     return (
-      <div className="transition-opacity  animate-load">
+      <div className="">
         <NavLink to={path}>
           <img src={item.pictureUrl} className="w-auto  max-w-full m-auto max-h-36" alt="product" />
           <h2 className="text-lg font-bold my-2 line-clamp-2">{item.title}</h2>

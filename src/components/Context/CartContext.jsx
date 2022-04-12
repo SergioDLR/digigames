@@ -58,9 +58,18 @@ const CartContextProvider = ({ children }) => {
   const updateStoragedCart = (cart) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
+  //calcula el precio final
+  const finalPrice = () =>
+    parseFloat(
+      cartList.reduce(
+        (previousValue, currentValue) =>
+          previousValue + parseFloat(currentValue.item.price) * parseInt(currentValue.quantity),
+        0
+      )
+    );
 
   return (
-    <CartContext.Provider value={{ cartList, onAdd, removeItem, clearCart, isInCart, quantityItems }}>
+    <CartContext.Provider value={{ cartList, onAdd, removeItem, clearCart, isInCart, quantityItems, finalPrice }}>
       {children}
     </CartContext.Provider>
   );

@@ -1,5 +1,6 @@
-import { collection, query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
-
+import { collection, query, where, documentId, writeBatch, getDocs, addDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { stockCheck } from "./stockCheck";
 export const createOrder = (orderName, orderPhone, orderMail, finalPrice, cartList) => {
   let order = {};
   const date = new Date();
@@ -35,4 +36,29 @@ export const updateStocks = async (dbConnect, cartList) => {
     )
   );
   batch.commit();
+};
+
+export const submitOrder = (orderName, orderPhone, orderMail, finalPrice, cartList) => {
+  const promise = new Promise((resolve, reject) => {
+    const dbConnect = getFirestore();
+    const queryCollection = collection(dbConnect, "orders");
+    const order = createOrder(orderName, orderPhone, orderMail, finalPrice, cartList);
+    stockCheck(cartList)
+      .then((res) => {
+        addDoc(queryCollection, order)
+          .then(({ id }) => {
+            if (id) {
+              updateStocks(dbConnect, cartList);
+              resolve(id);
+            }
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+  return promise;
 };

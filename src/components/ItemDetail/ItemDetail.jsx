@@ -19,7 +19,7 @@ const ItemDetail = ({ item, loading, activeFunction = () => {} }) => {
     } else {
       return (
         <>
-          <div className="lg:flex sm:flex-col lg:flex-row animate-load ">
+          <div className="lg:flex sm:flex-col lg:flex-row  ">
             <div className="lg:ml-auto">
               <img
                 className="w-auto m-auto cursor-pointer "
@@ -37,7 +37,7 @@ const ItemDetail = ({ item, loading, activeFunction = () => {} }) => {
                 <ItemCount product={item} stock={item.stock} onAdd={onAdd} setAdded={() => setAdded(false)} />
               ) : (
                 <div className="mt-auto">
-                  <Button title="Continuar comprando" action={() => navigate(-1)} />
+                  <Button title="Continuar comprando" action={() => navigate("/")} />
                   <Button
                     title="Terminar mi compra"
                     bgColor="bg-blue-600"
