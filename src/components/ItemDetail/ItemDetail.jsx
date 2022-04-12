@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Skeleton from "../Item/Skeleton";
 import Card from "../Utilities/Card";
 import Button from "../Utilities/Button";
-import ItemCount from "./ItemCount";
+import ItemCount from "components/ItemDetail/ItemCount";
 import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../Context/CartContext";
 import { priceParser } from "../Utilities/priceParser";

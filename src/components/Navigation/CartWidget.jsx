@@ -1,7 +1,6 @@
 import React from "react";
 import Icon from "../Utilities/Icon";
-import shoppingCartImg from "assets/images/shopping-cart.png";
-import hoverCartImg from "assets/images/shopping-cart-hover.png";
+
 import { useCartContext } from "../Context/CartContext";
 const CartWidget = ({ styles }) => {
   const { quantityItems } = useCartContext();
@@ -12,7 +11,7 @@ const CartWidget = ({ styles }) => {
           <strong className="opacity-100">{quantityItems}</strong>
         </span>
       </div>
-      <Icon sourceImage={shoppingCartImg} size="w-8" sourceHover={hoverCartImg} />
+      <Icon sourceImage={"/images/shopping-cart.png"} size="w-8" sourceHover={"/images/shopping-cart-hover.png"} />
     </div>
   );
 };

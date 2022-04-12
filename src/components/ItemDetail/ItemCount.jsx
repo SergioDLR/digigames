@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Utilities/Button";
-import Card from "../Utilities/Card";
-import Icon from "../Utilities/Icon";
-import addImg from "assets/images/add-white.png";
-import subImg from "assets/images/sub-white.png";
+import Button from "components/Utilities/Button";
+import Card from "components/Utilities/Card";
+import Icon from "components/Utilities/Icon";
 
 const ItemCount = ({ product, stock = 10, initial = 1, onAdd, setAdded }) => {
   const [countProducts, setCountProducts] = useState(initial);
@@ -31,13 +29,13 @@ const ItemCount = ({ product, stock = 10, initial = 1, onAdd, setAdded }) => {
           {" "}
           <div className="flex flex-row justify-center">
             <Button rounded="rounded-full" action={subCount}>
-              <Icon sourceImage={subImg} />
+              <Icon sourceImage={"/images/sub-white.png"} />
             </Button>
             <div className="flex-auto text-center m-auto">
               <span>{countProducts}</span>
             </div>
             <Button rounded="rounded-full " action={addCount}>
-              <Icon sourceImage={addImg} />
+              <Icon sourceImage={"/images/add-white.png"} />
             </Button>
           </div>
           <div className="flex justify-center">
