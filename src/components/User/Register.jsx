@@ -14,11 +14,13 @@ const Register = ({ setUser, setLoading }) => {
 
   const handleLogin = (evt) => {
     evt.preventDefault();
-    //Chequedo de inputs
-    if (mail !== mailConfirm || mail.length < 3 || !mail.includes("@")) return alert.error("ingresa un mail valido");
+    if (mail.length < 3 || !mail.includes("@")) return alert.error("ingresa un mail valido");
+    if (mail !== mailConfirm) return alert.error("Los mails no son iguales");
     if (phone.length < 3) return alert.error("ingresa un numero de telefono valido");
-    if (password.length < 6 || password !== passwordConfirm) return alert.error("Ingresa una contraseña valida");
+    if (password.length < 6) return alert.error("Ingresa una contraseña valida");
+    if (password !== passwordConfirm) return alert.error("Las contraseñas no son iguales");
     if (name.length < 3) return alert.error("ingresa un nombre valido");
+
     setLoading("loading");
     register(mail, password, name, phone)
       .then((res) => {

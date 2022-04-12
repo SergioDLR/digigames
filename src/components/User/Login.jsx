@@ -9,8 +9,6 @@ const Login = ({ setUser, setLoading }) => {
   const alert = useAlert();
   const handleLogin = (evt) => {
     evt.preventDefault();
-    //casos de salida
-
     if (mail.length < 3 || !mail.includes("@") || typeof mail != "string") {
       return alert.error("introdusca un mail valido");
     }

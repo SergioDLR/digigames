@@ -56,7 +56,7 @@ const UserSesion = () => {
   return (
     <div className="bg-sky-100 font-Montserrat min-h-screen h-full ">
       <div className="animate-load flex flex-col items-center">
-        <StateHandler></StateHandler>
+        <StateHandler />
       </div>
     </div>
   );

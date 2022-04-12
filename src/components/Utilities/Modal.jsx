@@ -33,7 +33,6 @@ export default function Modal({
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">{description}</p>
                   {children}
                 </div>
-                {/*footer*/}
                 {showActions && (
                   <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                     {showCancel && (

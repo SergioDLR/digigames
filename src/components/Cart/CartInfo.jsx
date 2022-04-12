@@ -10,7 +10,6 @@ import BuyAsVisitor from "./BuyAsVisitor";
 import Spinner from "components/Utilities/Spinner";
 
 const CartInfo = () => {
-  //añadir loading user info
   const [loadingUserInfo, setLoadingUserInfo] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState();

@@ -30,7 +30,6 @@ const OrderTrack = () => {
   };
 
   const BuyerItems = () => {
-    //retorna los items comprados
     let { items } = buy;
     return items.map((element, index) => (
       <CartDetail

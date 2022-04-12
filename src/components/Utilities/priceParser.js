@@ -1,5 +1,4 @@
 export const priceParser = (number) => {
-  //Agrega el separador decimal a un numero
   let floatPart = (number - Math.trunc(number)).toFixed(2).toString().replace(".", ",").replace("0", "");
   let parsedNumber = Math.trunc(number).toString().split("").reverse().join("");
   let newNumber = "";

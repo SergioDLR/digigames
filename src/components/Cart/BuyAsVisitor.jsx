@@ -75,7 +75,6 @@ const BuyAsVisitor = ({ finalPrice, cartList, clearCart }) => {
       />
     ),
   };
-  //Fix cancelation
   const [modalMensage, setModalMensage] = useState(waitingMensage);
   return (
     <>

@@ -9,7 +9,7 @@ getFirestoneApp();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/digiGames">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

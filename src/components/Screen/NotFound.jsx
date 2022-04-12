@@ -1,5 +1,4 @@
 import React from "react";
-
 import Icon from "../Utilities/Icon";
 const NotFound = () => {
   return (
