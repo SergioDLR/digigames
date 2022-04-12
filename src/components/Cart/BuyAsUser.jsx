@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Modal from "components/Utilities/Modal";
 import Button from "components/Utilities/Button";
 import { getPhone } from "components/Firebase/activeSesion";
-import Spinner from "components/Utilities/Spinner";
 import { submitOrder } from "components/Firebase/OrderCreation";
 const BuyAsUser = ({ user, finalPrice, cartList, clearCart }) => {
   const submitingMensage = {
@@ -12,7 +11,7 @@ const BuyAsUser = ({ user, finalPrice, cartList, clearCart }) => {
     description: `Estamos creando su orden, espere por favor`,
   };
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const errorStock = {
     title: "No queda stock",
     show: true,
@@ -52,40 +51,33 @@ const BuyAsUser = ({ user, finalPrice, cartList, clearCart }) => {
           })
           .finally();
       })
-      .catch((e) => e)
-      .finally(() => setLoading(false));
+      .catch((e) => e);
   };
   const waitingMensage = {
     title: "Terminar compra",
     show: true,
     showCancel: true,
-    description: `Estas comprando como ${user?.displayName}`,
+    description: `Estas comprando como ${user?.email}`,
     action: () => submitHandler(),
   };
   const [modalMensage, setModalMensage] = useState(waitingMensage);
   return (
     <>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <Button
-            action={() => setShowModal(true)}
-            bgColor="bg-green-600"
-            hover="hover:bg-green-800"
-            title={"Terminar compra"}
-          />
-          <Modal
-            title={modalMensage.title}
-            showModal={showModal}
-            setShowModal={setShowModal}
-            showCancel={modalMensage.showCancel}
-            description={modalMensage.description}
-            showActions={modalMensage.show}
-            onAcept={modalMensage.action}
-          />
-        </>
-      )}
+      <Button
+        action={() => setShowModal(true)}
+        bgColor="bg-green-600"
+        hover="hover:bg-green-800"
+        title={"Terminar compra"}
+      />
+      <Modal
+        title={modalMensage.title}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        showCancel={modalMensage.showCancel}
+        description={modalMensage.description}
+        showActions={modalMensage.show}
+        onAcept={modalMensage.action}
+      />
     </>
   );
 };

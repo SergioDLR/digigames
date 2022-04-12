@@ -1,16 +1,29 @@
-Sobre el proyecto:
-DigiGames es un e-commerce destinado a la venta de productos de gaming.
-Orientado principalmente a las keys o claves digitales, pero que también cuenta con productos físicos como consolas, periféricos y juegos físicos.
+# 🌟DigiGames🌟
 
-Dependencias adicionales:
-.Tailwind: Agrege tailwind por que queria aprender a utilizarlo.
-.react-router-dom
-.react-alers: agrege esta libreria de alertas para abstraerme del proceso de crearla yo mismo, queria ahorrar tiempo para dedicarselo a las otras funcionalidades.
+**DigiGames es un e-commerce destinado a la venta de productos de gaming.
+Orientado principalmente a las keys o claves digitales, pero que también cuenta con productos físicos como consolas, periféricos y juegos físicos**
 
-Algunas decisiones que tome:
--Cree el componente RoutesDef para aislar la definicion de las rutas y poder tenerlas en un componente separado.
--Cree el componente NotFound que muestra un cartelito 404, lo puse en un inicio para poder reconocer algún error con las rutas y para indicarle al usuario que la ruta solicitada no existe.
--Cree los componentes DesktopNavBar y MobileNavBar que dependiendo del ancho de la pantalla se renderiza uno o el otro. Con el objetivo de mejorar el aspecto visual de la versión mobile
--El componentes FocusImg permite agrandar la imagen del producto haciendo click en ella desde el detalle.
--En el itemDetail agregue un botón con un icono de back que permite volver al catálogo que se estaba visualizando previamente.
--Mi tienda cuenta con una pseudocategoria en el navbar que es la de ofertas, que muestra todos los productos que tengan true en la propiedad discount en el product.json
+# Funcionalidades 🖥
+
+**Se implementaron dos tipos de usuarios para la aplicación. El primero sería el tipo de usuario visitante el cual puede navegar sobre las distintas categorías de la aplicación, agregar productos al carrito y crear una orden, luego de completar un formulario con sus datos personales. El segundo tipo es el usuario registrado, que además de las funcionalidades básicas puede agregar productos a una wishlist y comprar sin tener que realizar el formulario de datos de contacto, por que estos ya fueron almacenados.**
+
+# Adicionales 📎
+
+###
+
+- **Cálculo de stock al momento de realizar una compra, para evitar compras imposibles.**
+- **Descuento de stock, una vez finalizada la compra.**
+- **Persistencia del carrito, usando el localStorage del navegador.**
+- **Autenticación de usuarios, con mail y contraseña usando firebase auth.**
+- **Lista de deseados para usuarios autenticados.**
+- **Consultar el estado de una orden. Muestra los productos de la orden, la fecha de compra y el estado de la misma, pero no muestra ningún tipo de dato personal.**
+
+# Tecnologias utilizadas👩‍💻
+
+###
+
+- **ReactJs.**
+- **Tailwind.**
+- **Firebase.**
+
+### **Puedes probar la aplicación de digigames utilizando el siguiente link: _[DigiGames Demo](sergiodlr.github.com/digigames)_**

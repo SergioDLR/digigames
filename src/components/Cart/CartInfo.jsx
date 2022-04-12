@@ -7,17 +7,20 @@ import Modal from "../Utilities/Modal";
 import { activeSesion } from "components/Firebase/activeSesion";
 import BuyAsUser from "./BuyAsUser";
 import BuyAsVisitor from "./BuyAsVisitor";
+import Spinner from "components/Utilities/Spinner";
 
 const CartInfo = () => {
+  //añadir loading user info
+  const [loadingUserInfo, setLoadingUserInfo] = useState(true);
   const [showModal, setShowModal] = useState(false);
-
   const [user, setUser] = useState();
   const { cartList, clearCart, finalPrice } = useCartContext();
 
   useEffect(() => {
     activeSesion()
       .then((resp) => setUser(resp))
-      .catch((e) => e);
+      .catch((e) => e)
+      .finally(() => setLoadingUserInfo(false));
   }, []);
 
   return (
@@ -31,10 +34,15 @@ const CartInfo = () => {
             title={"Vaciar carrito"}
             action={() => setShowModal(true)}
           />
-          {user ? (
-            <BuyAsUser user={user} finalPrice={finalPrice()} cartList={cartList} clearCart={clearCart} />
+
+          {!loadingUserInfo ? (
+            user ? (
+              <BuyAsUser user={user} finalPrice={finalPrice()} cartList={cartList} clearCart={clearCart} />
+            ) : (
+              <BuyAsVisitor finalPrice={finalPrice()} cartList={cartList} clearCart={clearCart} />
+            )
           ) : (
-            <BuyAsVisitor finalPrice={finalPrice()} cartList={cartList} clearCart={clearCart} />
+            <Spinner />
           )}
         </div>
       </Card>

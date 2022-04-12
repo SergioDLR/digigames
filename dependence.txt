@@ -1,0 +1,4 @@
+Las dependencias usadas para el proyecto son:
+.Tailwind: Agrege tailwind por que queria aprender a utilizarlo.
+.react-router-dom
+.react-alers: agrege esta libreria de alertas para abstraerme del proceso de crearla yo mismo, queria ahorrar tiempo para dedicarselo a las otras funcionalidades.

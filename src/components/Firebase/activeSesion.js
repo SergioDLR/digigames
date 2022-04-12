@@ -27,7 +27,7 @@ export const getPhone = () => {
           })
           .catch((e) => reject(e));
       })
-      .catch((e) => e);
+      .catch((e) => reject(e));
   });
   return promise;
 };
