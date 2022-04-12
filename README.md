@@ -30,3 +30,5 @@ Orientado principalmente a las keys o claves digitales, pero que también cuenta
 1. **Ejecuta el comando "npm install" en una terminal dentro del proyecto.**
 1. **Ejecuta el comando "npm run start" en una terminal dentro del proyecto.**
 1. **Ingresa a http://localhost:3000/ desde un navegador.**
+
+# Depencencias: Ver archivo dependences.md 📙
