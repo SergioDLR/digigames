@@ -11,7 +11,7 @@ const Register = ({ setUser, setLoading }) => {
   const [passwordConfirm, setpasswordConfirm] = useState("");
   const [phone, setPhone] = useState();
   const alert = useAlert();
-
+  //estos son nuevos cambios al repo
   const handleLogin = (evt) => {
     evt.preventDefault();
     if (mail.length < 3 || !mail.includes("@")) return alert.error("ingresa un mail valido");
