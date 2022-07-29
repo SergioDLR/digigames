@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Skeleton from "../Item/Skeleton";
 import Card from "../Utilities/Card";
 import Button from "../Utilities/Button";
 import ItemCount from "./ItemCount";
 import { useNavigate } from "react-router-dom";
+import { GContext } from "../Cart/CartContext";
 const ItemDetail = ({ item, loading, activeFunction }) => {
   const navigate = useNavigate();
   const [cantidad, setCantidad] = useState(0);
 
+  const { addItem } = useContext(GContext);
+
   const onAdd = (cant) => {
-    setCantidad(cantidad + cant);
+    addItem(item, cant);
   };
 
+  console.log(addItem);
   return (
     <div className="w-3/4 xl:w-1/2 m-auto mt-3  ">
       <Card>

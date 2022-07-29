@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import ItemListContainer from "../Item/ItemListContainer";
 import NotFound from "../Screen/NotFound";
 import ItemDetailContainer from "../ItemDetail/ItemDetailContainer";
-import Cart from "../Screen/Cart";
+import Cart from "../Cart/Cart";
 
 const RoutesDef = () => {
   return (
