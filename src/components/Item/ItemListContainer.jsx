@@ -14,8 +14,8 @@ const ItemListContainer = ({ discount = false }) => {
     let timeOutID;
     let loadData = new Promise((resolve) => {
       if (catIdSearch) {
-        timeOutID = setTimeout(() => resolve(productsJSON.filter((item) => item.category === catIdSearch)), 2000);
-      } else timeOutID = setTimeout(() => resolve(productsJSON), 2000);
+        timeOutID = setTimeout(() => resolve(productsJSON.filter((item) => item.category === catIdSearch)), 300);
+      } else timeOutID = setTimeout(() => resolve(productsJSON), 300);
     });
 
     loadData.then((items) => {

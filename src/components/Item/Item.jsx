@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../Utilities/Card";
 import { NavLink } from "react-router-dom";
 import Skeleton from "./Skeleton";
+
 const Item = ({ item, loaded = false }) => {
   const initialValuesP = "hidden opacity-0";
   const initialValuesDiv = "shadow";

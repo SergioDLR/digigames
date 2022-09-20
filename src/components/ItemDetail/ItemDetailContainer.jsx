@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     let loadData = new Promise((resolve) => {
-      setTimeout(() => resolve(productsJSON.filter((pItem) => pItem.id === searchId).shift()), 2000);
+      setTimeout(() => resolve(productsJSON.filter((pItem) => pItem.id === searchId).shift()), 300);
     });
     loadData.then((data) => {
       setProduct(data);
