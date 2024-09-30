@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import Skeleton from "../Item/Skeleton";
-import Card from "../Utilities/Card";
-import Button from "../Utilities/Button";
-import ItemCount from "./ItemCount";
-import { useNavigate } from "react-router-dom";
-const ItemDetail = ({ item, loading, activeFunction }) => {
-  const navigate = useNavigate();
-  const [cantidad, setCantidad] = useState(0);
+import React, { useState } from 'react'
+import Skeleton from '../Item/Skeleton'
+import Card from '../Utilities/Card'
+import Button from '../Utilities/Button'
+import ItemCount from './ItemCount'
+import { useNavigate } from 'react-router-dom'
 
-  const onAdd = (cant) => {
-    setCantidad(cantidad + cant);
-  };
+const ItemDetail = ({ item, loading, activeFunction }) => {
+  const navigate = useNavigate()
+  const [cantidad, setCantidad] = useState(0)
+
+  const onAdd = () => {
+    //
+  }
 
   return (
     <div className="w-3/4 xl:w-1/2 m-auto mt-3  ">
@@ -40,7 +41,7 @@ const ItemDetail = ({ item, loading, activeFunction }) => {
                       title="Terminar mi compra"
                       bgColor="bg-blue-600"
                       hover="hover:bg-sky-800"
-                      action={() => navigate("/cart")}
+                      action={() => navigate('/cart')}
                     />
                   </div>
                 )}
@@ -52,7 +53,7 @@ const ItemDetail = ({ item, loading, activeFunction }) => {
         )}
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default ItemDetail;
+export default ItemDetail
